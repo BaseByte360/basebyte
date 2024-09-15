@@ -1,0 +1,31 @@
+<div class="container">
+  <slot />
+</div>
+
+<style lang="scss">
+  @import '../styles/variables.scss';
+
+  .container {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 2rem;
+    margin: 0 auto;
+
+    @include sm {
+      max-width: $screen-sm-min;
+    }
+
+    @include md {
+      max-width: $screen-sm-min;
+      padding: 0 1rem;
+    }
+
+    @include lg {
+       max-width: $screen-md-min;
+    }
+
+    @include xl {
+      max-width: 1251px;
+    }
+  }
+</style>

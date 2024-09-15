@@ -1,0 +1,29 @@
+---
+interface Props {
+  link: string;
+}
+
+const { link } = Astro.props;
+---
+<a href={link}>
+  <slot name="icon"/>
+  <slot name="label"/>
+</a>
+
+<style lang="scss">
+  @import '../styles/variables.scss';
+
+  a {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    text-decoration: none;
+    color: $foreground-title-color;
+    border: 2px solid $foreground-title-color;
+    text-align: center;
+  }
+</style>

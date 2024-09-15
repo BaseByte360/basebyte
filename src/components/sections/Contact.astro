@@ -1,0 +1,179 @@
+---
+import { getEntry } from 'astro:content';
+import { icons } from '../../utils/SocialMediaIcons.astro';
+import Container from "../Container.astro";
+import Whatsapp from '../icons/Whatsapp.astro';
+
+
+const { data: { contact: data } } = await getEntry('main', 'content');
+const { data: socialMedia } = await getEntry('socialMedia', 'social-media');
+
+const whatsappId = 'whatsapp';
+
+const whatsapp = socialMedia.find(item => item.id === whatsappId);
+---
+<section id={data.menu.id}>
+	<Container>
+    <div class="main-container">
+      <h2>{data.content.title}</h2>
+      {data.content.paragraphs.map(paragraph => (
+        <p><Fragment set:html={paragraph}/></p>
+      ))}
+      {whatsapp && (
+        <a class="whatsapp-link" href={whatsapp.link} target="_blank">
+          <Whatsapp />
+          <span set:html={data.content.callToAction} />
+        </a>
+      )}
+      <p>{data.content.or}</p>
+      <ul class="direct-contact">
+        {socialMedia.map(item => {
+          if (!item.hideFromMainPage && !item.canFollow && item.id !== whatsappId) {
+            const Icon = icons[item.id];
+            return (
+              <li>
+                <a href={item.link} target="_blank">
+                  <Icon gradient="purple"/>
+                  {item.title}
+                </a>
+              </li>
+            )
+          }
+        })}
+      </ul>
+    </div>
+    <div class="social-media">
+      <span set:html={data.content.followUs} />
+      <ul>
+        {socialMedia.map(item => {
+          if (!item.hideFromMainPage && item.canFollow) {
+            const Icon = icons[item.id];
+            return (
+              <li>
+                <a href={item.link} target="_blank">
+                  <Icon color="white"/>
+                  {item.title}
+                </a>
+              </li>
+            )
+          }
+        })}
+      </ul>
+    </div>
+	</Container>
+</section>
+<style lang="scss">
+  @import "../../styles/variables.scss";
+
+  div.main-container {
+    text-align: center;
+
+    @include xl {
+      text-align: start;
+      max-width: 50%;
+    }
+  }
+  h2 {
+    padding: 0;
+    margin: 0 0 1rem;
+  }
+
+  p {
+    margin: 1rem 0;
+    text-align: inherit;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+
+    li {
+      a {
+        text-decoration: none;
+      }
+    }
+
+  }
+
+  ul.direct-contact {
+    display: inline-block;
+    text-align: inherit;
+    margin-bottom: 4rem;
+
+    li {
+      a {
+        padding: 4px 0;
+        @include text-gradient;
+        background-image: $purple-gradient;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+    }
+  }
+
+  .social-media {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    span {
+      font-weight: 500;
+      margin-bottom: 1rem;
+      text-align: center;
+      line-height: 24px;
+    }
+
+    ul {
+      margin: 1rem 0 4rem;
+
+      @include lg {
+        display: inline-flex;
+        gap: 4rem; 
+      }
+
+      li {
+        text-align: center;
+        a {
+          padding: 4px 0;
+          color: $foreground-title-color;
+          display: inline-flex;
+          gap: 8px;
+          align-items: center;
+
+          @include lg {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+          }
+        }
+      }
+    }
+  }
+
+  .whatsapp-link {
+    margin: 2rem auto;
+    padding: 1.5rem;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 1rem 2rem;
+    border-radius: 6px;
+    text-decoration: none;
+    color: $foreground-title-color;
+    text-align: center;
+    font-weight: 500;
+    background-image: $violet-gradient;
+
+      
+    @include lg {
+      font-size: 24px;
+    }
+
+    @include xl {
+      margin: 2rem 0;
+    }
+  }
+</style>

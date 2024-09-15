@@ -1,0 +1,82 @@
+// COLORS
+$bg-color: #000;
+$bg-color-transparent: #00000000;
+$purple: #5800ff;
+$pink: #e900ff;
+$violet: #dd4ceb;
+$red: #ff0000;
+$yellow: #ffc600;
+$blue: #074fd9;
+$cyan: #00f1fd;
+$foreground-title-color: #ffffff;
+$foreground-text-color: #d1d1d1;
+$grey: #333333;
+$light-grey: #454545;
+
+// GRADIENTS
+$orange-gradient: linear-gradient(112deg, $yellow, $red);
+$purple-gradient: linear-gradient(112deg, $purple, $pink);
+$violet-gradient: linear-gradient(
+  134deg,
+  #{$purple}50 25.45%,
+  #{$violet}26 101.76%
+);
+$blue-gradient: linear-gradient(112deg, $blue, $cyan);
+
+// BREAKPOINTS
+$screen-sm-min: 640px;
+$screen-md-min: 768px;
+$screen-lg-min: 1024px;
+$screen-xl-min: 1280px;
+$screen-xxl-min: 1920px;
+
+@mixin sm {
+  @media (min-width: #{$screen-sm-min}) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (min-width: #{$screen-md-min}) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (min-width: #{$screen-lg-min}) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @media (min-width: #{$screen-xl-min}) {
+    @content;
+  }
+}
+
+@mixin xxl {
+  @media (min-width: #{$screen-xxl-min}) {
+    @content;
+  }
+}
+
+// Media query for custom sizes
+@mixin custom-size($size) {
+  @media (min-width: $size+"px") {
+    @content;
+  }
+}
+
+@mixin text-gradient {
+  background-size: 100%;
+  background-repeat: repeat;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+}
+
+@function pxToRem($size) {
+  $remSize: calc($size / 16px);
+  @return #{$remSize}rem;
+}

@@ -1,0 +1,26 @@
+{
+  "name": "basebyte",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/partytown": "^2.0.2",
+    "@astrojs/sitemap": "^3.0.3",
+    "@lottiefiles/jlottie": "^1.2.1",
+    "astro": "^3.6.0",
+    "astro-compress": "^2.2.3",
+    "astro-robots-txt": "^1.0.0",
+    "glider-js": "^1.7.8",
+    "lottie-web": "^5.12.2",
+    "sass": "^1.69.4"
+  },
+  "devDependencies": {
+    "@types/glider-js": "^1.7.11"
+  }
+}

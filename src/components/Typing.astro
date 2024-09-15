@@ -1,0 +1,115 @@
+---
+interface Props {
+	texts: string[];
+}
+
+const { texts } = Astro.props;
+---
+<astro-typing class="typing-container" data-content={texts}>
+  <span class="word" />
+</astro-typing>
+
+<style lang="scss">
+  @import '../styles/variables.scss';
+
+  .typing-container {
+    @include text-gradient;
+    background-image: $orange-gradient;
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+
+    span {
+      letter-spacing: inherit;
+    }
+
+    .word::after {
+      content: '';
+      animation: blink .5s linear infinite alternate;
+      display: inline-block;
+      width: 5px;
+      height: pxToRem(36px);
+      margin-bottom: pxToRem(-6px);
+      margin-left: 4px;
+      background: $red;
+
+      @include sm {
+        width: 7px;
+        height: pxToRem(68px);
+        margin-bottom: pxToRem(-12px);
+      }
+      
+
+      @include lg {
+        height: 90px;
+        width: 8px;
+        height: pxToRem(80px);
+        margin-bottom: -14px;
+      }
+    }
+  }
+
+  @keyframes blink {
+    0% {opacity: 1;}
+    40% {opacity: 1;}
+    60% {opacity: 0;}
+    100% {opacity: 0;}
+  }
+</style>
+
+<script>
+  class Typing extends HTMLElement {
+    constructor() {
+      super();
+      const texts = this.dataset.content?.split(',') ?? [];
+      const wordSpan = this.querySelector('.word')!;
+      wordSpan.innerHTML = texts[0];
+      
+      waitForMs(4000).then(() => carousel(wordSpan, texts));
+    }
+  }
+
+  async function carousel(elementRef: Element, texts: string[]) {
+    let count = 1;
+    while(true) {
+      await deleteSentence(elementRef);
+      await waitForMs(100);
+      await typeSentence(texts[count], elementRef);
+      await waitForMs(3000);
+
+      count++;
+
+      if (count >= texts.length) {
+        count = 0;
+      }
+    }
+  }
+
+  async function typeSentence(sentence: string, elementRef: Element, delay = 100) {
+    const letters = sentence.split("");
+    let i = 0;
+    while(i < letters.length) {
+      await waitForMs(delay);
+      elementRef.append(letters[i]);
+      i++
+    }
+    return;
+  }
+
+  async function deleteSentence(elementRef: Element, delay = 100) {
+    const sentence = elementRef.innerHTML;
+    const letters = sentence.split("");
+
+    while(letters.length > 0) {
+      await waitForMs(delay);
+      letters.pop();
+      elementRef.innerHTML = letters.join('');
+    }
+  }
+
+  function waitForMs(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms))
+  }
+
+  customElements.define('astro-typing', Typing);
+</script>

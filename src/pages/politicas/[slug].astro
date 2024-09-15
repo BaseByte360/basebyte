@@ -1,0 +1,150 @@
+---
+import { Image } from 'astro:assets';
+import Footer from '../../components/Footer.astro';
+import Layout from '../../layouts/Layout.astro';
+import Logo from '../../assets/logo-vertical.svg';
+import Container from '../../components/Container.astro';
+
+import fs from 'fs';
+
+export async function getStaticPaths() {
+  const policies = await Astro.glob('../../content/policies/*.md')
+  
+  const formatter = new Intl.DateTimeFormat('pt-BR', {
+    dateStyle: 'medium',
+    timeStyle: 'short',
+  });
+
+  return policies.map(policy => ({
+    params: {
+      slug: policy.frontmatter.slug
+    },
+    props: {
+      policy: {
+        ...policy,
+        ...policy.frontmatter,
+        modifiedAt: formatter.format(new Date(fs.statSync(policy.file).mtime)), 
+      },
+    },
+  }))
+}
+
+const { Content, title, modifiedAt } = Astro.props.policy
+---
+<Layout title={title} description={`BaseByte - ${title}`}>
+    <Container>
+      <a href="/" class="logo">
+        <Image src={Logo} alt="BaseByte" />
+      </a>
+      <h1>{title}</h1>
+      <span class="modified-at">{modifiedAt}</span>
+    </Container>
+    <main>
+      <Container>
+        <Content/>
+      </Container>
+    </main>
+  <Footer />
+</Layout>
+
+<style is:inline>
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  footer {
+    margin-top: 80px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: auto;
+  }
+
+  footer a {
+    font-size: 14px;
+  }
+
+  main {
+    margin-top: 40px;
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: auto;
+  }
+
+  a {
+    display: inline;
+    text-decoration: none;
+    color: #FFC600;
+  }
+
+  .logo {
+    margin: 80px 0;
+    display: inline-block;
+  }
+
+  img {
+    max-width: 80px;
+    object-fit: contain;
+  }
+
+  h1 {
+    font-size: 42px;
+    letter-spacing: normal;
+  }
+
+  .modified-at {
+    color: #d1d1d1;
+  }
+
+  main {
+    color: #fff;
+  }
+
+  p { 
+    margin-bottom: 8px;
+    color: inherit;
+  }
+
+  ul,ol,a,p {
+    font-size: 16px;
+    line-height: 32px;
+    color: #fff;
+  }
+
+  ul {
+    list-style: inside;
+  }
+
+	ol {
+		list-style-type: none;
+		counter-reset: item;
+		margin: 0;
+		padding: 0;
+	}
+
+	ol > li {
+		display: table;
+		counter-increment: item;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 49px;
+	}
+
+	ol > li:before {
+		content: counters(item, ".") ". ";
+		display: table-cell;
+		padding-right: 0.6em;    
+	}
+
+	li ol > li {
+		margin: 0;
+    font-size: 22px;
+    font-weight: normal;
+    line-height: 42px;
+	}
+
+	li ol > li:before {
+		content: counters(item, ".") " ";
+	}
+</style>

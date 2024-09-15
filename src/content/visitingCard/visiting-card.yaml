@@ -1,0 +1,14 @@
+metadata:
+  title: BaseByte - Links
+  description: Agência 360 com DNA Tech, especializada em Marcas e Negócios Digitais
+content:
+  phraseFull: <strong>Agência 360</strong> com <span class="blue">DNA Tech,</span><br/> especializada em <span class="orange">Marcas</span> e <span class="purple">Negócios</span>
+  phraseBold: Agência 360
+  phrase: com DNA Tech, especializada em 
+  firstHighlight: Marcas
+  interpolation: e
+  secondHighlight: Negócios Digitais
+callToLinkTree:
+  content: Quer uma página personalizada para o seu negócio?
+  button: Clique Aqui!
+  buttonLink: https://wa.me/5511937250894?text=

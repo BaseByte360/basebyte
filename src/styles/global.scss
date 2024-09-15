@@ -1,0 +1,180 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-focus-ring-color: transparent !important;
+  outline: none !important;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 16px;
+  height: 100%;
+  -webkit-font-smoothing: antialiased;
+}
+
+html {
+  font-family: "Inter", sans-serif;
+  background: $bg-color;
+}
+
+h1 {
+  letter-spacing: pxToRem(-2px);
+
+  @include md {
+    letter-spacing: pxToRem(-3px);
+  }
+
+  @include lg {
+    font-size: pxToRem(68px);
+    letter-spacing: -3.5px;
+  }
+
+  @include xl {
+    font-size: 78px;
+    letter-spacing: -5px;
+  }
+}
+
+h2 {
+  letter-spacing: pxToRem(-0.4px);
+  padding: 0 10px;
+  display: inline-block;
+  margin: 4rem 0 2rem;
+
+  @include lg {
+    letter-spacing: pxToRem(-3.2px);
+    font-size: pxToRem(50px);
+  }
+
+  @include xl {
+    font-size: pxToRem(64px);
+  }
+}
+
+h3 {
+  letter-spacing: pxToRem(-1.44px);
+  font-size: pxToRem(30px);
+  margin-bottom: pxToRem(8px);
+
+  @include xl {
+    font-size: pxToRem(36px);
+    margin-bottom: 1rem;
+  }
+}
+
+p,
+ul {
+  color: $foreground-text-color;
+  line-height: pxToRem(28px);
+  font-weight: 500;
+  text-align: justify;
+  line-height: 30px;
+
+  @include xl {
+    font-size: 18px;
+    line-height: 32px;
+  }
+
+  @include xxl {
+    font-size: 20px;
+    line-height: 35px;
+  }
+}
+
+p,
+ul,
+span {
+  letter-spacing: pxToRem(-0.48px);
+}
+
+span,
+h1,
+h2,
+h3,
+h4 {
+  color: $foreground-title-color;
+}
+
+::selection {
+  background: #{$pink}66;
+  color: $foreground-title-color;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: $bg-color;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #{$pink}55;
+  border-radius: 4px;
+}
+
+.orange-bg {
+  background-image: $orange-gradient;
+}
+
+.purple-bg {
+  background-image: $purple-gradient;
+}
+
+.blue-bg {
+  background-image: $blue-gradient;
+}
+
+.blue {
+  @include text-gradient;
+  font-weight: bold;
+  background-image: $blue-gradient;
+}
+
+.orange {
+  @include text-gradient;
+  background-image: $orange-gradient;
+  font-weight: bold;
+}
+
+.purple {
+  @include text-gradient;
+  background-image: $purple-gradient;
+  font-weight: bold;
+}
+
+.purple-start-color {
+  stop-color: $purple;
+}
+
+.purple-end-color {
+  stop-color: $pink;
+}
+
+.orange-start-color {
+  stop-color: $yellow;
+}
+
+.orange-end-color {
+  stop-color: $red;
+}
+
+.blue-start-color {
+  stop-color: $blue;
+}
+
+.blue-end-color {
+  stop-color: $cyan;
+}

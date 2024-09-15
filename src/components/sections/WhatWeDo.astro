@@ -1,0 +1,225 @@
+---
+import { getEntry } from 'astro:content';
+import Container from "../Container.astro";
+import { Image } from 'astro:assets';
+import InfiniteCarousel from '../InfiniteCarousel.astro';
+import Carousel from '../Carousel.astro';
+
+const { data: { whatWeDo: data } } = await getEntry('main', 'content');
+
+
+---
+<section id={data.menu.id}>
+	<article class="what-we-do-wrapper">
+    <Container>
+      <h2>{`${data.content.title.content} `}
+        <span>{data.content.title.highlight}</span>
+      </h2>
+      {data.content.paragraphs.map(phrase => <p><Fragment set:html={phrase}/></p>)}
+      <div class="steps">
+        {data.content.steps.map((step, i) => (
+          <>
+            <div class:list={['step-wrapper', `${step.color}-bg`]}>
+              <div class="step">
+                <div>
+                  <span class:list={['number', `${step.color}`]}>{i+1}<span>#</span></span> 
+                  <h3 set:html={step.title}></h3>
+                  <p set:html={step.description}></p>
+                </div>
+                <Image src={step.icon} alt={step.iconAlt} />
+              </div>
+            </div>
+            {i < data.content.steps.length -1  && (
+              <div class="arrow-container">
+                <span class="arrow" />
+              </div>
+            ) }
+          </>
+        ))}
+      </div>
+    </Container>
+  </article>
+  <article class="carousel-wrapper">
+    <Carousel />
+  </article>
+  <InfiniteCarousel />
+</section>
+
+<style lang="scss">
+  @import '../../styles/variables.scss';
+
+  section {
+    padding-top: 2rem;
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0.2;
+        transform: translate(0, 20vh);
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  }
+  
+  .what-we-do-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h2 {
+      padding: 0;
+      width: 100%;
+      text-align: center;
+      margin-bottom: 52px;
+
+      span {
+        @include text-gradient;
+        background-image: $purple-gradient;
+      }
+
+      @include md {
+        font-size: 42px;
+      }
+      
+      @include lg {
+        font-size: 56px;
+      }
+      
+      @include xl {
+        font-size: 64px;
+        padding: 0 pxToRem(160px);
+      }
+    }
+
+    p {
+      text-align: center;
+    }
+
+    .steps {
+      margin: 4rem 0;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+
+      .arrow-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .arrow {
+        background-color: $foreground-text-color;
+        height: 40px;
+        width: 4px;
+        margin: 0 auto;
+        position: relative;
+        border-radius: 4px;
+        margin: 2rem;
+
+        &:before, &:after {
+          content: '';
+          background-color: $foreground-text-color;
+          position: absolute;
+          height: 20px;
+          width: 4px;
+          border-radius: 4px;
+        }
+
+        &:before {
+          right: 6px;
+          bottom: -4px;
+          transform: rotate(-45deg);
+        }
+
+        &:after {
+          right: -6px;
+          bottom: -4px;
+          transform: rotate(45deg);
+        }
+
+        @include xl {
+          margin: 44px;
+          transform: rotate(-90deg);
+        }
+      }
+
+      .step-wrapper {
+        max-width: 400px;
+        width: 100%;
+        padding: 3px;
+        border-radius: 8px;
+        display: flex;
+      }
+
+      .step {
+        background: $bg-color;
+        border-radius: 8px;
+        padding: 1rem;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        text-align:center;
+
+        span.number {
+          font-size: 69px;
+          margin-bottom: 1rem;
+
+          & > span {
+            font-size: 37px;
+          }
+        }
+
+        h3 {
+          font-size: 24px;
+          margin-bottom: pxToRem(24px);
+        }
+
+        p {
+          text-align: center;
+          font-size: 16px;
+        }
+
+        img {
+          margin-top: 2rem;
+        }
+
+        @include sm {
+          h3 {
+            font-size: 30px;
+          }
+        }
+
+        @include md {
+          padding: 2rem;
+        }
+
+        @include xl {
+          padding: 1.5rem;
+
+          p {
+            font-size: 19px;
+          }
+        }
+      }
+
+      @include xl {
+        flex-direction: row;
+        align-items: inherit;
+        animation: fadeIn 1ms forwards;
+        animation-timeline: view();
+        animation-range: cover 0% cover 70%;
+      }
+    }
+
+  }
+  
+  .carousel-wrapper {
+    @include lg {
+      margin-top: 3rem;
+    }
+  }
+
+</style>

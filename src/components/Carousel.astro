@@ -1,0 +1,166 @@
+---
+import { getEntry } from "astro:content";
+import OutlineButton from "./OutlineButton.astro";
+
+const { data: { whatWeDo: data} } = await getEntry('main', 'content');
+
+---
+<div class="glider-contain">
+  <div id="glider">
+    {data.content.carousel.map(item => (
+      <div class:list={['banner', `${item.color}-bg`]}>
+        <div class="container">
+          <div class="content">
+            <h3><Fragment set:html={item.title}/></h3>
+            {item.paragraphs.map(paragraph => <p><Fragment set:html={paragraph}/></p>)}
+            <div class="button-wrapper">
+              <OutlineButton link={data.content.carouselLink}>
+                <div slot="label" set:html={data.content.carouselLinkContent} />
+              </OutlineButton>
+            </div>
+          </div>
+          <div class="words">
+            {item.words.map(word => <span>{word}</span>)}
+          </div>
+        </div>       
+      </div>
+    ))}
+  </div>
+  <div class="dots-container">
+    <div role="tablist" class="dots"></div>
+  </div>
+</div>
+
+<style is:inline>
+  .glider-contain {
+    position: relative;
+  }
+
+  .dots-container {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .glider-dot.active {
+    opacity: 1;
+    background-color: #fff;
+  }
+
+  .glider-dot {
+    border-radius: 4px;
+    opacity: 0.6;
+  }
+</style>
+
+<style lang="scss">
+  @import '../styles/variables.scss';
+
+  .banner {
+    position: relative;
+    padding: 4rem 2rem;
+    width: 100%;
+    color: $foreground-title-color;
+
+    h3 {
+      margin-bottom: 2rem;
+
+      @include lg {
+        font-size: 4.5vw;
+      }
+    }
+
+    @include sm {
+      padding: 6rem;
+    }
+
+    @include xl {
+      padding: 180px;
+    }
+
+    p {
+      color: inherit;
+      text-align: start;
+    }
+
+    .button-wrapper {
+      margin-top: 2rem;
+    }
+  }
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 9vw;
+  }
+
+  .words {
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+    opacity: 0.3;
+    font-weight: bold;
+    align-items: end;
+    font-size: 6vw;
+
+    @include md {
+      display: flex;
+    }
+  }
+</style>
+
+<script>
+  import Glider from "glider-js";
+  
+  let glider: Glider<HTMLElement>;
+  
+  window.addEventListener('load', () => {
+    glider = new Glider(document.getElementById('glider')!, {
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      draggable: true,
+      dots: '.dots',
+      scrollLock: true,
+      scrollLockDelay: 0,
+      rewind: true,
+    });
+
+    autoplay(glider, 4000);
+  })
+
+  
+  function autoplay(slider: Glider<HTMLElement>, miliseconds: number) {
+        const slidesCount = slider.track.childElementCount;
+        let slideTimeout: any;
+        let nextIndex = 1;
+
+        function slide () {
+            slideTimeout = setTimeout(
+                function () {
+                    nextIndex = slider.page+1;
+                    if (nextIndex >= slidesCount ) {
+                        nextIndex = 0;
+                    }
+                    
+                    slider.scrollItem(nextIndex++, false);
+                }, miliseconds);
+        }
+
+        slider.ele.addEventListener('glider-animated', function() {
+            window.clearInterval(slideTimeout);
+            slide();
+        });
+
+        window.addEventListener('scroll', () => {
+          window.clearInterval(slideTimeout);
+        })
+
+        window.addEventListener('scrollend', () => {
+          slide();
+        })
+
+        slide();
+    }
+</script>

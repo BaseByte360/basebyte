@@ -1,0 +1,33 @@
+- id: whatsapp
+  title: Whatsapp
+  link: "https://wa.me/5511937250894?text="
+  canFollow: false
+- id: mail
+  title: E-mail
+  link: "mailto:contato@basebyte.com.br?subject=Primeiro Contato"
+  canFollow: false
+- id: telegram
+  title: Telegram
+  link: "https://t.me/basebyte_br"
+  canFollow: false
+- id: facebook
+  title: Facebook
+  link: "https://www.facebook.com/basebyte.br"
+  canFollow: true
+- id: instagram
+  title: Instagram
+  link: "https://www.instagram.com/basebyte_br"
+  canFollow: true
+- id: website
+  title: Website
+  link: "https://basebyte.com.br"
+  hideFromMainPage: true
+  canFollow: false
+- id: linkedin
+  title: LinkedIn
+  link: "https://linkedin.com/company/basebytebr"
+  canFollow: true
+# - id: youtube
+#   title: Youtube
+#   link: "https://www.youtube.com/@basebyte_br"
+#   canFollow: true

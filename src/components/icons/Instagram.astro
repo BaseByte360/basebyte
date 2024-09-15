@@ -1,0 +1,33 @@
+---
+interface Props {
+  color: string;
+  gradient?: 'purple' | 'orange' | 'blue';
+}
+
+const { color = '#FFFFFF', gradient, ...props } = Astro.props;
+---
+<svg stroke={gradient ? "url(#gradient)" : color} {...props} width="24" height="24" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M20 2H8C4.68629 2 2 4.76155 2 8.16809V20.5043C2 23.9108 4.68629 26.6724 8 26.6724H20C23.3137 26.6724 26 23.9108 26 20.5043V8.16809C26 4.76155 23.3137 2 20 2Z" stroke="#fill" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M19.4123 13.5492C19.576 14.6457 19.3874 15.7656 18.8734 16.7495C18.3594 17.7335 17.546 18.5314 16.5491 19.0297C15.5522 19.5281 14.4225 19.7016 13.3206 19.5255C12.2187 19.3494 11.2007 18.8327 10.4116 18.0488C9.62237 17.265 9.10213 16.254 8.92482 15.1595C8.74751 14.0651 8.92216 12.943 9.42394 11.9529C9.92571 10.9627 10.7291 10.1549 11.7197 9.64437C12.7104 9.13383 13.8379 8.94653 14.9419 9.10913C16.068 9.27499 17.1106 9.79618 17.9155 10.5957C18.7205 11.3953 19.2453 12.4307 19.4123 13.5492Z" stroke="#fill" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <g filter="url(#filter0_d_365_1503)">
+  <path d="M20.2861 6.69885H20.3001" stroke="#fill" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <defs>
+  <filter id="filter0_d_365_1503" x="15.0361" y="5.44885" width="10.5137" height="10.5" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+  <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+  <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+  <feOffset dy="4"/>
+  <feGaussianBlur stdDeviation="2"/>
+  <feComposite in2="hardAlpha" operator="out"/>
+  <feColorMatrix type="matrix" values="0 0 0 0  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+  <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_365_1503"/>
+  <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_365_1503" result="shape"/>
+  </filter>
+  </defs>
+  {gradient && (
+    <linearGradient id="gradient" x1="7.48524" y1="0" x2="19.1117" y2="11.2119" gradientUnits="userSpaceOnUse">
+      <stop class={`${gradient}-start-color`}/>
+      <stop offset="1" class={`${gradient}-end-color`} />
+    </linearGradient>
+  )}
+</svg>   

@@ -1,0 +1,278 @@
+---
+import { getEntry } from 'astro:content';
+import verticalLogo from '../../assets/logo-vertical.svg';
+import { Image } from 'astro:assets';
+
+const { data } = await getEntry('main', 'content');
+
+interface Menu {
+  id: string;
+  label: string;
+}
+
+const sections = Object.values(data).filter(value => value.hasOwnProperty('menu')) as unknown as { menu: Menu }[];
+const menu = sections.map(item => item.menu);
+
+const middle = Math.round((menu.length - 1) / 2);
+const leftMenu = [...menu].splice(0, middle);
+const rightMenu = [...menu].splice(middle);
+---
+
+<header data-menu={JSON.stringify(menu).replace(' ','')}>
+  <div class="container">
+    <a class="mobile-logo" href="#">
+      <Image src={verticalLogo} alt="BaseByte" />
+    </a>
+    <input type="checkbox" class="side-menu" id="side-menu" />
+    <label aria-label="Menu button" for="side-menu" class="menu-icon">
+      <span class="bar1" />
+      <span class="bar2" />
+      <span class="bar3" />
+    </label>
+    <nav id="nav">
+      <ul>
+        {leftMenu.map(item => {
+          return (
+            <li>
+              <a href={`#${item.id}`}>
+                <span>{item.label}</span>
+              </a>  
+            </li>
+          )
+        })}
+        <li class="vertical-logo">
+          <a href="#" aria-label="BaseByte">
+            <Image src={verticalLogo} alt="BaseByte" />
+          </a>
+        </li>
+        {rightMenu.map(item => {
+          return (
+            <li>
+              <a href={`#${item.id}`}>
+                <span>{item.label}</span>  
+              </a>  
+            </li>
+          )
+        })}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style lang="scss">
+  @import '../../styles/variables.scss';
+  
+  .link-active > span{
+    position: relative;
+    text-shadow: 0 0 1px $foreground-title-color;
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 75%;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 2px;
+      bottom: -8px;
+      background-image: $purple-gradient;
+    }
+  }
+
+  header {
+    background-color: $bg-color;
+    position: fixed;
+    padding: 0.5rem 0;
+    top: 0;
+    z-index: 50;
+    width: 100%;
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s;
+    animation: line 1ms ease forwards;
+    animation-timeline: scroll(root);
+    animation-range: cover 0% cover 30%;
+
+    .container {
+      padding: 0 1rem;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .side-menu {
+      display: none;
+
+      @media (max-width: #{$screen-md-min}) {
+        &:not(:checked) ~ nav {
+          display: none;
+        }
+
+        &:checked ~ .menu-icon {
+          & > .bar1 {
+            transform: translate(0, 4px) rotate(-45deg);
+          }
+
+          & > .bar2 {
+            opacity: 0;
+          }
+
+          & > .bar3 {
+            transform: translate(0, -8px) rotate(45deg);
+          }
+        }
+      }
+    }
+
+    .mobile-logo > img {
+      height: 45px;
+      object-fit: contain;
+    }
+
+    .menu-icon {
+      cursor: pointer;
+      width: 24px;
+      position: absolute;
+      top: 12px;
+      right: 1rem;
+
+      .bar1, .bar2, .bar3 {
+        display: block;
+        width: 100%;
+        height: 2px;
+        margin: 4px 0;
+        background-color: $foreground-title-color;
+        transition: all 0.4s;
+      }
+    }
+
+    nav {
+      letter-spacing: -0.5px;
+      transition: all 0.3s;
+      display: block;
+      width: 100%;
+
+      ul {
+        list-style: none;
+        padding: 1rem 0 0 0;
+        margin: 0;
+
+        a {
+          padding: pxToRem(12px) 0;
+          text-decoration: none;
+          color: $foreground-title-color;
+          transition: 0.15s;
+          text-align: center;
+          width: 100%;
+          display: block;
+
+          &:focus {
+            background-color: transparent;
+          }
+
+          &:hover {
+            text-shadow: 0 0 1px $foreground-title-color;
+          }
+        }
+
+        .vertical-logo {
+          display: none;
+          padding: 8px 0;
+
+          img {
+            margin: auto;
+            vertical-align: middle;
+            width: 80px;
+            animation: resizeLogo 1s ease forwards;
+            animation-timeline: scroll();
+            animation-range: cover 0% cover 30%;
+            object-fit: contain;
+          }
+        }
+      }
+
+      @include md {
+        ul {
+          padding: 0;
+          display: flex;
+          align-items: center;
+          justify-content: space-evenly;
+          gap: pxToRem(8px);
+              
+          .vertical-logo {
+            display: block;
+          }
+
+          li {
+            a {
+              width: auto;
+              display: inline-block;
+              font-size: 1rem;
+              width: 160px;
+              padding: 0;
+            }
+          }
+        }
+      }
+    }
+
+    @include md {
+      padding: 0.25rem 0;
+
+      .mobile-logo, .menu-icon {
+        display: none;
+      }
+    }
+  }
+
+  @keyframes line {
+    from {
+      border-color: transparent;
+    }
+    to {
+      border-color: $grey;
+    }
+  }
+
+  @keyframes resizeLogo {
+    from {
+      height: 83px;
+    }
+    to {
+      height: 64px;
+    }
+  }
+</style>
+
+
+<script>
+  import { getNearestIndex } from '../../utils/getNearestIndex';
+  const header = document.querySelector('header')!;
+  const menuButton = document.getElementById('side-menu') as HTMLInputElement;
+
+  const links = header.querySelectorAll('a');
+
+  links?.forEach(link => {
+    link.addEventListener('click', () => {
+      menuButton.checked = false;
+    })
+  });
+ 
+  const menu: {
+    id: string
+  }[] = JSON.parse(header.dataset.menu!);
+
+  const elements = menu.map(item => document.getElementById(item.id)!);
+  const menuItems = menu.map(item => document.querySelector(`[href="#${item.id}"]`)!)
+  updateMenuActive();
+  
+  window.addEventListener('scroll', () => {
+    updateMenuActive();
+  })
+
+  function updateMenuActive() {
+    const nearestIndex = getNearestIndex(window.scrollY, elements, 0, elements.length -1);
+    menuItems.forEach(item => item.classList.remove('link-active'));
+    menuItems[nearestIndex].classList.add('link-active');
+  }
+</script>

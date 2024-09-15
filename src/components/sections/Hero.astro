@@ -1,0 +1,202 @@
+---
+import { getEntry } from 'astro:content';
+import Typing from '../Typing.astro';
+import Container from '../Container.astro';
+import Chevron from '../icons/Chevron.astro';
+import Whatsapp from '../icons/Whatsapp.astro';
+
+const { data: { home: data, whatWeDo } } = await getEntry('main', 'content');
+---
+<section class="hero" id={data.menu.id}>
+	<div class="bg-animation">
+		<div id="lottie"/>
+		<div class="fade-box" />
+	</div>
+	<Container>
+		<h1>
+			<strong>{data.firstLine.bold}</strong>
+			{' '}{data.firstLine.content}{' '}
+			<span class="blue-highlight">{data.firstLine.highlight}</span>
+			{' '}{data.secondLine.content}{' '}
+			<span class="typing-wrapper"><Typing texts={data.secondLine.highlights}/></span>
+		</h1>
+		<a href={data.callToAction.link} class="call-to-action" target="_blank">
+			<span>
+				<Whatsapp slot="icon" />
+				<div slot="label" set:html={data.callToAction.content} />
+			</span>
+		</a>
+		<a href={`#${whatWeDo.menu.id}`} class="chevron" aria-label="Navegar para próxima seção">
+			<Chevron />
+		</a>
+	</Container>
+</section>
+
+<style lang="scss">
+  @import '../../styles/variables.scss';
+
+	.blue-highlight {
+		@include text-gradient;
+		background-image: $blue-gradient;
+	}
+
+	.hero {
+		height: 100vh;
+		width: 100%;
+		position: relative;
+		overflow: hidden;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		.call-to-action {
+			width: fit-content;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 0.5rem 1rem;
+			border-radius: 6px;
+			text-decoration: none;
+			color: $foreground-title-color;
+			border: 2px solid $foreground-title-color;
+			text-align: center;
+			margin: 0 auto;
+			position: relative;
+
+			span {
+				z-index: 1;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 8px;
+			}
+
+			&:before {
+				content: "";
+				border-radius: 6px;
+				position: absolute;
+				bottom: 0;
+				top: 0;
+				left: 0;
+				right: 0;
+				-webkit-backdrop-filter: blur(2px);
+      	backdrop-filter: blur(2px);
+				-webkit-transform: translate3d(0, 0, 0);
+				-moz-transform: translate3d(0, 0, 0);
+				-webkit-backface-visibility: hidden;
+				-moz-backface-visibility: hidden;
+				transform: translate3d(0, 0, 0);
+			}
+			
+			@include lg {
+				gap: 16px;
+				padding: 1rem 2rem;
+				font-size: 22px;
+			}
+		}
+
+		.chevron {
+			position: absolute;
+			bottom: 3rem;
+			left: 50%;
+			transform: translate(-50%, 0);
+		}
+
+		h1 {
+			z-index: 1;
+			text-align: center;
+			font-size: pxToRem(27px);
+			font-weight: normal;
+			margin-bottom: 40px;
+			line-height: 40px;
+			letter-spacing: -1px;
+
+			span {
+				letter-spacing: inherit;
+				font-weight: bold;
+			}
+			
+			& > span {
+				margin: 1rem 0;
+			}
+
+			@include sm {
+				font-size: pxToRem(64px);
+				letter-spacing: -4px;
+				line-height: normal;
+
+
+				.typing-wrapper {
+					display: block;
+				}
+				
+				& > span {
+					margin: 0;
+				}
+			}
+
+			@include lg {
+				font-size: pxToRem(80px);
+				letter-spacing: -5px;
+				margin-bottom: 64px;
+
+				& > span {
+					margin: 0;
+				}
+			}
+
+			@include xl {
+				font-size:  78px;
+				letter-spacing: -5px;
+
+				.typing-wrapper {
+					display: inline;
+				}
+
+				& > span {
+					margin: pxToRem(-12px) 0;
+				}
+			}
+		}
+	}
+
+	.bg-animation {
+		z-index: -1;
+		position: absolute;
+		display: flex;
+		justify-content: center;
+		bottom: 0;
+		min-width: 2500px;
+		width: 100%;
+		opacity: 0.6;
+
+		#lottie {
+			width: 100%;
+			margin-left: -12px;
+		}
+
+		.fade-box {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			background: linear-gradient(
+				to bottom, 
+				$bg-color 0%,
+				$bg-color-transparent 20%, 
+				$bg-color-transparent 60%, 
+				$bg-color 100%
+			);
+		}
+	}
+</style>
+<script>
+	import Lottie from "lottie-web";
+	import grid from '../../assets/grid.json'
+
+	Lottie.loadAnimation({
+		container: document.querySelector('#lottie')!,
+		animationData: grid,
+	})
+</script>

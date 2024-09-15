@@ -1,0 +1,63 @@
+---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+
+const clients = await getCollection('clients');
+---
+<section>
+  <div class="slide-track">
+    {clients.map(client => (
+        <Image src={client.data.img} alt={client.data.alt} style={{ objectFit: 'contain' }}/>
+    ))}
+  </div>
+  <div class="slide-track">
+    {clients.map(client => (
+        <Image src={client.data.img} alt={client.data.alt} style={{ objectFit: 'contain' }} />
+    ))}
+  </div>
+</section>
+
+<style lang="scss">
+  @import '../styles/variables.scss';
+
+  section {
+    user-select: none;
+    background-color: $yellow;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 30px 0;
+    height: auto;
+
+    @include xxl {
+      padding: 1.2vw 0;
+      height: 6vw;
+    }
+  }
+
+  .slide-track {
+    animation: 40s scroll infinite linear;
+    display: inline-block;
+    height: auto;
+
+      img {
+        user-select: none;
+        height: 60px;
+        margin: 0 40px;
+      }
+
+    @include xxl {
+      height: 100%;
+
+      img {
+        height: 100%;
+        width: 8vw;
+        margin: 0 2vw;
+      }
+    }
+  }
+
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%)}
+  }
+</style>

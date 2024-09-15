@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/sections/Hero.astro';
+import Header from '../components/sections/Header.astro';
+import WhatWeDo from '../components/sections/WhatWeDo.astro';
+import WhoWeAre from '../components/sections/WhoWeAre.astro';
+import Contact from '../components/sections/Contact.astro';
+import { getEntry } from 'astro:content';
+import Footer from '../components/Footer.astro';
+
+const { data: { metadata: data } } = await getEntry('main', 'content');
+
+---
+
+<Layout title={data.title} description={data.description}>
+	<Header />
+	<Hero />
+	<WhatWeDo />
+	<WhoWeAre />
+	<Contact />
+	<Footer />
+	<link rel="stylesheet" href="glider.min.css" slot="header"/>
+</Layout>
+
+<style lang="scss">
+	
+</style>

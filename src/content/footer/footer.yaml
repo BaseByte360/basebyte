@@ -1,0 +1,11 @@
+footer: 
+  company: BaseByte
+  year: 2024
+  copyright: Todos os direitos reservados
+links:
+  - label: Termos de Serviço
+    link: "/politicas/termos-de-servico"
+  - label: Política de Privacidade
+    link: "/politicas/politica-de-privacidade"
+  # - label: Política de Cookies
+  #   link: "#"

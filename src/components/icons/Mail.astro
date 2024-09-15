@@ -1,0 +1,17 @@
+---
+interface Props {
+  color?: string;
+  gradient?: 'purple' | 'orange' | 'blue';
+}
+
+const { color = '#FFFFFF', gradient, ...props } = Astro.props;
+---
+<svg stroke={gradient ? "url(#gradient)" : color} width="24" height="20" viewBox="0 0 24 20" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+  <path d="M23 3.2C23 1.99 22.01 1 20.8 1H3.2C1.99 1 1 1.99 1 3.2M23 3.2V16.4C23 17.61 22.01 18.6 20.8 18.6H3.2C1.99 18.6 1 17.61 1 16.4V3.2M23 3.2L12 10.9L1 3.2" stroke="#fill" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  {gradient && (
+    <linearGradient id="gradient" x1="7.48524" y1="0" x2="19.1117" y2="11.2119" gradientUnits="userSpaceOnUse">
+      <stop class={`${gradient}-start-color`}/>
+      <stop offset="1" class={`${gradient}-end-color`} />
+    </linearGradient>
+  )}
+</svg>

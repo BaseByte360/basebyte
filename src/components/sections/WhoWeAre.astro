@@ -1,0 +1,92 @@
+---
+import { getEntry } from 'astro:content';
+import Container from "../Container.astro";
+import Collaborator from '../Collaborator.astro';
+
+const { data: { who: data } } = await getEntry('main', 'content');
+
+---
+<section id={data.menu.id}>
+	<Container>
+		<div class="title-wrapper">
+      <h2>{data.title}</h2>
+    </div>
+    {data.content.map(p => (<p><Fragment set:html={p}/></p>))}
+    <p class="slogan">
+      <strong>{data.slogan.company}</strong>
+      {data.slogan.content}
+    </p>
+    <div class="collaborators">
+      {data.collaborators.map(({name, role, avatar}) => (
+        <Collaborator name={name} role={role} avatar={avatar}/>
+      ))}
+    </div>
+	</Container>
+</section>
+<style lang="scss">
+  @import '../../styles/variables.scss';
+
+  section {
+    margin: 0 auto;
+    text-align: center;
+
+    .title-wrapper {
+      width: 100%;
+      text-align: center;
+
+      h2 {
+        @include text-gradient;
+        background-image: $purple-gradient;
+        padding: 0;
+        padding-right: 4px;
+        margin: 2rem 0 0;
+
+        @include lg {
+          margin: 4rem 0 2rem;
+        }
+      }
+    }
+
+
+    p {
+      text-align: inherit;
+      margin: 1rem 0;
+    }
+
+    .slogan {
+      margin-top: 2rem;
+      text-align: inherit;
+      strong {
+        display: block;
+      }
+
+      @include md {
+        strong {
+          display: inline;
+          
+          &:after {
+            content: ' - ';
+          }
+        }
+      }
+    }
+
+    @include md {
+      text-align: start;
+    }
+
+    .collaborators {
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin: 4rem 0;
+      font-weight: 500;
+
+      @include xl {
+        grid-template-columns: repeat(2, 1fr);
+        justify-content: space-between;
+      }
+    }
+  }
+</style>

@@ -1,0 +1,129 @@
+metadata:
+  title: BaseByte - Agência 360 em tecnologia
+  description: Agência 360 com DNA de Tecnologia e especializada em Marcas e Negócios Digitais. A Base da Transformação 
+    Tecnológica.
+  url: https://basebyte.com.br
+  twitterUsername: basebyteBR
+home:
+  menu:
+    id: home
+    label: Home
+  firstLine:
+    bold: Agência 360
+    content: com
+    highlight: DNA Tech,
+  secondLine:
+    content: especializada em
+    highlights: 
+      - Marcas.
+      - Negócios Digitais.
+  callToAction:
+    link: /contato
+    content: Converse com a <strong>BaseByte!</strong>
+whatWeDo:
+  menu:
+    id: o-que-fazemos
+    label: O Que Fazemos
+  content:
+    title: 
+      content: Simplificamos o atendimento com o
+      highlight: BB 360
+    paragraphs:
+      - "O <strong>BB 360</strong> é uma metodologia criada pela BaseByte que agiliza a entrega de soluções para as principais demandas 
+        do seu negócio, seu objetivo é simples e poderoso: levantar as competências da sua marca, produtos ou serviços 
+        e conectar com oportunidades relevantes no mercado."
+    steps:
+      - color: orange
+        title: Diagnóstico de Oportunidades
+        description: Canal aberto com uma equipe de profissionais prontos para te auxiliar desde a concepção e 
+          desenvolvimento até o lançamento, baseado em tendências sólidas de mercado e interesses do seu público.
+        icon: ../../assets/board.svg
+        iconAlt: Prancheta
+      - color: blue
+        title: Plano de Ação e Mão na Massa
+        description: Planejamento e execução coordenados para garantir a entrega de seus materiais gráficos e soluções 
+          digitais dentro do prazo e sem surpresas no orçamento.
+        icon: ../../assets/pencil-mug.svg
+        iconAlt: Caneca com pincéis e canetas
+      - color: purple
+        title: Resultados e Feedback
+        description: Relatório completo com os principais resultados de acordo com seus objetivos. Além da construção 
+          de um relatório de recomendações e insights com base nos feedback dos seus clientes.
+        icon: ../../assets/slide.svg
+        iconAlt: Quadro de apresentação
+    carouselLink: "/contato"
+    carouselLinkContent: Conversar com um <strong>Especialista</strong>
+    carousel:
+      - color: blue
+        title: Tech de Verdade!
+        paragraphs: 
+          - Chega de usar ferramentas genéricas que comprometem a qualidade dos seus serviços e a agilidade da operação.
+          - Aqui na <strong>Base</strong>, as soluções são personalizadas para atender exatamente ao que você precisa.
+        words:
+          - automatizar
+          - otimizar
+          - desenvolver
+          - configurar
+      - color: purple
+        title: Negócios Impactantes
+        paragraphs: 
+          - Desenvolvemos e organizamos seu plano de negócios, facilitando a gestão e viabilizando resultados valiosos.
+        words:
+          - organizar
+          - alcançar
+          - validar
+          - fidelizar
+      - color: orange
+        title: Marcas Surpreendentes
+        paragraphs: 
+          - Soluções completas para sua marca alcançar posições de destaque no mercado, em meios digitais e físicos.
+        words:
+          - imaginar
+          - criar
+          - comunicar
+          - encantar
+who:
+  menu:
+    id: a-base
+    label: A Base
+  title: A Base
+  content:
+    - A <strong>BaseByte</strong> combina a experiência de seus criadores nas áreas de tecnologia e marketing para impulsionar empresas 
+      e negócios, desde a concepção e desenvolvimento de marca até a conquista de uma gestão otimizada e uma presença 
+      impactante no mercado.
+    - Como uma empresa dinâmica e com foco na inovação tecnológica, nossa missão é compreender as necessidades que 
+      dificultam a organização e alcance do seu negócio e implementar soluções estratégicas que garantam praticidade na 
+      gestão e visibilidade para o seu público.
+    - Aqui na Base, acreditamos que a tecnologia é uma ferramenta poderosa que permite tornar operações mais 
+      inteligentes, eficientes e menos burocráticas, e com isso, é possível solucionar desafios complexos, melhorar a 
+      qualidade dos serviços prestados e entregar experiências encantadoras aos seus clientes.
+  slogan:
+    company: BaseByte
+    content: A Base para a Transformação Tecnológica.
+  collaborators:
+    # - name: Bruno Correa
+    #   role: Desenvolvedor Back-end
+    #   avatar: ../../assets/collaborators/bruno.svg
+    # - name: Gustavo Nogales
+    #   role: Desenvolvedor Front-end
+    #   avatar: ../../assets/collaborators/gustavo.svg
+    - name: Vitoria Nogueira
+      role: Copywriting
+      avatar: ../../assets/collaborators/vitoria.svg
+    - name: Wellington Silva
+      role: Designer Senior
+      avatar: ../../assets/collaborators/wellington.svg
+contact:
+  menu:
+    id: fale-conosco
+    label: Fale Conosco
+  content:
+    title: Fale conosco
+    paragraphs:
+      - Seja numa reunião online ou num bate papo com um café, aqui na BaseByte a gente se esforça para entender e 
+        entregar as melhores soluções pra você. 
+      - Conta pra gente, <strong>o que você precisa</strong>?
+    callToAction: Mensagem no <strong>Whatsapp</strong>
+    or: "Ou, se preferir:"
+    followUs: Acompanhe as <strong>Redes Sociais</strong> da <strong>BaseByte!</strong>
+footer: BaseByte © 2023 | Todos os direitos reservados
