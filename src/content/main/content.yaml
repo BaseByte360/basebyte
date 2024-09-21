@@ -18,7 +18,7 @@ home:
       - Marcas.
       - Negócios Digitais.
   callToAction:
-    link: /contato
+    link: https://wa.me/5511937250894?text=
     content: Converse com a <strong>BaseByte!</strong>
 whatWeDo:
   menu:
@@ -51,7 +51,7 @@ whatWeDo:
           de um relatório de recomendações e insights com base nos feedback dos seus clientes.
         icon: ../../assets/slide.svg
         iconAlt: Quadro de apresentação
-    carouselLink: "/contato"
+    carouselLink: "https://wa.me/5511937250894?text="
     carouselLinkContent: Conversar com um <strong>Especialista</strong>
     carousel:
       - color: blue

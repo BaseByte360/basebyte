@@ -131,17 +131,6 @@ const socialMedia = defineCollection({
   })),
 })
 
-const contact = defineCollection({
-  type: 'data',
-  schema: z.object({
-    metadata: z.object({
-      title: z.string(),
-      description: z.string(),
-    }),
-    redirect: z.string()
-  })
-})
-
 const footer = defineCollection({
   type: 'data',
   schema: z.object({
@@ -168,7 +157,6 @@ const policies = defineCollection({
 export const collections = {
   main: content,
   clients,
-  contact,
   visitingCard,
   socialMedia,
   footer,
