@@ -88,7 +88,7 @@ who:
     label: A Base
   title: A Base
   content:
-    - A <strong>BaseByte</strong> combina a experiência de seus criadores nas áreas de tecnologia e marketing para impulsionar empresas 
+    - A <strong>BaseByte</strong> combina a experiência de seus criadores nas áreas de empreendedorismo, marketing e tecnologia para impulsionar empresas 
       e negócios, desde a concepção e desenvolvimento de marca até a conquista de uma gestão otimizada e uma presença 
       impactante no mercado.
     - Como uma empresa dinâmica e com foco na inovação tecnológica, nossa missão é compreender as necessidades que 
@@ -107,11 +107,14 @@ who:
     # - name: Gustavo Nogales
     #   role: Desenvolvedor Front-end
     #   avatar: ../../assets/collaborators/gustavo.svg
+    - name: Crizan Cesar
+      role: Vendas e Relacionamento​
+      avatar: ../../assets/collaborators/crizan.svg
     - name: Vitoria Nogueira
-      role: Copywriting
+      role: Estratégia e Conteúdo
       avatar: ../../assets/collaborators/vitoria.svg
     - name: Wellington Silva
-      role: Designer Senior
+      role: Gestão de Produto e UX
       avatar: ../../assets/collaborators/wellington.svg
 contact:
   menu:
