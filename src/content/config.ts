@@ -86,6 +86,9 @@ const content = defineCollection({
       })
     }),
     footer: z.string(),
+    blackfriday: z.object({
+      link: z.string(),
+    })
   }),
 });
 
