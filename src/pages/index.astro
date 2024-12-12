@@ -7,14 +7,12 @@ import WhoWeAre from '../components/sections/WhoWeAre.astro';
 import Contact from '../components/sections/Contact.astro';
 import { getEntry } from 'astro:content';
 import Footer from '../components/Footer.astro';
-import Modal from '../components/Modal.astro';
 
 const { data: { metadata: data } } = await getEntry('main', 'content');
 
 ---
 
 <Layout title={data.title} description={data.description}>
-	<Modal />
 	<Header />
 	<Hero />
 	<WhatWeDo />
