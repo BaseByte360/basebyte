@@ -17,4 +17,10 @@ export default defineConfig({
       },
     }),
   ],
+  redirects: {
+    '/qr/esdras': {
+      destination: 'https://cashbarber.com.br/esdrassilvahair',
+      status: 301,
+    },
+  },
 });
