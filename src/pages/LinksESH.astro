@@ -1,0 +1,146 @@
+---
+import { getEntry } from 'astro:content';
+import verticalLogo from '../assets/logo-vertical.svg';
+import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import { icons } from '../utils/SocialMediaIcons.astro';  
+import Footer from '../components/Footer.astro';
+
+const { data: { metadata, ...data } } = await getEntry('visitingCard', 'visiting-card');
+const { data: socialMedia } = await getEntry('socialMedia', 'social-media');
+const { data: { footer } } = await getEntry('main', 'content');
+
+---
+
+<Layout title={metadata.title} description={metadata.description}>
+  <div class="bg" />
+  <section>
+    <Image src={verticalLogo} alt="BaseByte logo" />
+    <h1 set:html={data.content.phraseFull}/>
+    <div class="links">
+      {socialMedia.map(media => {
+        const Icon = icons[media.id];
+        return (
+          <a href={media.link}>
+            <Icon color="white" />
+            {media.title} 
+          </a>
+        )
+      })}
+    </div>
+    <div class="link-tree">
+      <p>{data.callToLinkTree.content}</p>
+      <a href={data.callToLinkTree.buttonLink}>{data.callToLinkTree.button}</a>
+    </div>
+  </section>
+  <Footer />
+</Layout>
+
+<style lang="scss">
+  @import '../styles/variables.scss';
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .bg {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0.1;
+    background-image: url('../assets/planet.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position-x: center;
+    background-size: auto;
+    z-index: -1;
+  }
+
+  section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.25rem;
+    text-align: center;
+    gap: pxToRem(24px);
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  img {
+    margin-top: 1rem;
+  }
+
+  h1 {
+    margin: 1rem 0 2rem;
+  }
+
+  h1, span {
+    letter-spacing: normal;
+    line-height: normal;
+    font-size: pxToRem(20px);
+    font-weight: 500;
+
+    & span:first-child, .blue {
+      @include text-gradient;
+		  background-image: $blue-gradient;
+    }
+
+    & span:nth-child(2) {
+      @include text-gradient;
+		  background-image: $purple-gradient;
+    }
+  }
+
+  .links {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: pxToRem(24px);
+
+    & a {
+      background-image: $purple-gradient;
+      border-radius: pxToRem(6px);
+      text-decoration: none;
+      color: #FFF;
+      font-weight: 500;
+      width: 100%;
+      position: relative;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      & svg:first-child {
+        position: absolute;
+        left: 1rem;
+      }
+    }
+  }
+
+  .link-tree {
+    margin-bottom: 2rem;
+    p {
+      margin: 2rem 0 8px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    a {
+      text-decoration: none;
+      @include text-gradient;
+      background-image: $orange-gradient;
+      font-size: 16px;
+      font-weight: bold;
+    }
+  }
+
+</style>
