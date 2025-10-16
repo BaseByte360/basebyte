@@ -1,10 +1,10 @@
 ---
 import { getEntry } from 'astro:content';
-import verticalLogo from '../assets/logo-vertical.svg';
-import Layout from '../layouts/Layout.astro';
+import verticalLogo from '../../assets/logo-vertical.svg';
+import Layout from '../../layouts/Layout.astro';
 import { Image } from 'astro:assets';
-import { icons } from '../utils/SocialMediaIcons.astro';  
-import Footer from '../components/Footer.astro';
+import { icons } from '../../utils/SocialMediaIcons.astro';  
+import Footer from '../../components/Footer.astro';
 
 const { data: { metadata, ...data } } = await getEntry('visitingCard', 'visiting-card');
 const { data: socialMedia } = await getEntry('socialMedia', 'social-media');
@@ -37,7 +37,7 @@ const { data: { footer } } = await getEntry('main', 'content');
 </Layout>
 
 <style lang="scss">
-  @import '../styles/variables.scss';
+  @import '../../styles/variables.scss';
 
   body {
     min-height: 100vh;
@@ -52,7 +52,7 @@ const { data: { footer } } = await getEntry('main', 'content');
     left: 0;
     right: 0;
     opacity: 0.1;
-    background-image: url('../assets/planet.svg');
+    background-image: url('../../assets/planet.svg');
     background-repeat: no-repeat;
     background-size: contain;
     background-position-x: center;
