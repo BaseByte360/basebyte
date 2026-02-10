@@ -22,5 +22,9 @@ export default defineConfig({
       destination: 'https://cashbarber.com.br/esdrassilvahair',
       status: 302,
     },
+    '/qr/falajandirense': {
+      destination: 'https://forms.gle/nR6M4wvPZRk9kvhf6',
+      status: 302,
+    },
   },
 });
