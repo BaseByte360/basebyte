@@ -26,5 +26,9 @@ export default defineConfig({
       destination: 'https://forms.gle/nR6M4wvPZRk9kvhf6',
       status: 302,
     },
+     '/qr/pointfarma': {
+      destination: 'https://wa.me/5511968484901',
+      status: 302,
+    },
   },
 });
